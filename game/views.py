@@ -122,7 +122,7 @@ def six_output(request):
         localTypeSuggest = "您的住家有低度的失竊風險，應加強防範。"
     #######
 
-    conn = psycopg2.connect(database="taoyuangis", user="postgres", password=“tp6ful3mp6”, host="127.0.0.1",
+    conn = psycopg2.connect(database="taoyuangis", user="postgres", password="please input your password here", host="127.0.0.1",
                             port="5432")
     cur = conn.cursor()
     cur2 = conn.cursor()
