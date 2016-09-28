@@ -86,7 +86,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'taoyuangis',
         'USER': 'postgres', # Not used with sqlite3.
-        'PASSWORD': 'tp6ful3mp6', # Not used with sqlite3.
+        'PASSWORD': 'please input your password here', # Not used with sqlite3.
         'HOST': '',
         'PORT': '',
     }
