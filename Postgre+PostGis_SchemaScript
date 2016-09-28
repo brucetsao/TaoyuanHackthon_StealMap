@@ -1,0 +1,126 @@
+#請建立Postgre 9.5 + PostGIS 2.2環境 ， 並選擇建置GIS類型資料庫
+
+
+##建立Database
+
+-- Database: taoyuangis
+
+-- DROP DATABASE taoyuangis;
+
+CREATE DATABASE taoyuangis
+  WITH OWNER = postgres
+       ENCODING = 'UTF8'
+       TABLESPACE = pg_default
+       LC_COLLATE = 'C'
+       LC_CTYPE = 'C'
+       CONNECTION LIMIT = -1;
+
+
+##建立空間索引
+
+-- Table: public.spatial_ref_sys
+
+-- DROP TABLE public.spatial_ref_sys;
+
+CREATE TABLE public.spatial_ref_sys
+(
+  srid integer NOT NULL,
+  auth_name character varying(256),
+  auth_srid integer,
+  srtext character varying(2048),
+  proj4text character varying(2048),
+  CONSTRAINT spatial_ref_sys_pkey PRIMARY KEY (srid),
+  CONSTRAINT spatial_ref_sys_srid_check CHECK (srid > 0 AND srid <= 998999)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.spatial_ref_sys
+  OWNER TO postgres;
+GRANT ALL ON TABLE public.spatial_ref_sys TO postgres;
+GRANT SELECT ON TABLE public.spatial_ref_sys TO public;
+
+
+##建立監視器點位自動增加id
+
+CREATE SEQUENCE public.points_id_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1236
+  CACHE 1;
+ALTER TABLE public.points_id_seq
+
+
+-- Table: public.points (監視器點位）
+
+-- DROP TABLE public.points;
+
+CREATE TABLE public.points
+(
+  id integer NOT NULL DEFAULT nextval('points_id_seq'::regclass),
+  name character varying(40),
+  location geometry(Point,4326),
+  CONSTRAINT points_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.points
+  OWNER TO postgres;
+
+-- Index: public.points_location_idx
+
+-- DROP INDEX public.points_location_idx;
+
+CREATE INDEX points_location_idx
+  ON public.points
+  USING gist
+  (location);
+  
+
+
+##建立路燈點位自動增加id
+  
+-- Sequence: public.pointslight_id_seq
+
+-- DROP SEQUENCE public.pointslight_id_seq;
+
+CREATE SEQUENCE public.pointslight_id_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 25662
+  CACHE 1;
+ALTER TABLE public.pointslight_id_seq
+  OWNER TO postgres;
+  
+  
+-- Table: public.pointslight  (路燈點位）
+
+-- DROP TABLE public.pointslight;
+
+CREATE TABLE public.pointslight
+(
+  id integer NOT NULL DEFAULT nextval('pointslight_id_seq'::regclass),
+  name character varying(40),
+  location geometry(Point,3826),
+  CONSTRAINT pointslight_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.pointslight
+  OWNER TO postgres;
+
+-- Index: public.pointslight_location_idx
+
+-- DROP INDEX public.pointslight_location_idx;
+
+CREATE INDEX pointslight_location_idx
+  ON public.pointslight
+  USING gist
+  (location);
+
+
+
