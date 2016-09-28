@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>住宅安全即時監控儀表板</title>
+
+<link href="/static/lumino/css/bootstrap.min.css" rel="stylesheet">
+<link href="/static/lumino/css/datepicker3.css" rel="stylesheet">
+<link href="/static/lumino/css/styles.css" rel="stylesheet">
+
+<!--Icons-->
+<script src="/static/lumino/js/lumino.glyphs.js"></script>
+
+<!--[if lt IE 9]>
+<script src="js/html5shiv.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
+
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#"><span>Lumino</span>Admin</a>
+				<ul class="user-menu">
+					<li class="dropdown pull-right">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> User <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Profile</a></li>
+							<li><a href="#"><svg class="glyph stroked gear"><use xlink:href="#stroked-gear"></use></svg> Settings</a></li>
+							<li><a href="#"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Logout</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+
+		</div><!-- /.container-fluid -->
+	</nav>
+		
+
+		
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+				<li class="active">Icons</li>
+			</ol>
+		</div><!--/.row-->
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header">即時監控儀表板</h1>
+			</div>
+		</div><!--/.row-->
+		
+		<div class="row">
+			<div class="col-xs-12 col-md-6 col-lg-3">
+				<div class="panel panel-{% if light.1 <= '30' %}red {% endif %}{% if light.1 > '30' and light.1 <= '60' %}orange {% endif %}{% if light.1 > '60' %}teal {% endif %} panel-widget ">
+					<div class="row no-padding">
+						<div class="col-sm-3 col-lg-5 widget-left">
+							<svg class="glyph stroked clock"><use xlink:href="#stroked-clock"></use></svg>
+						</div>
+						<div class="col-sm-9 col-lg-7 widget-right">
+							<div class="large">
+                                {% if light.1 <= '30' %} 高 {% endif %}
+                                {% if light.1 > '30' and light.1 <= '60' %} 中 {% endif %}
+                                {% if light.1 > '60' %} 低 {% endif %}
+                            </div>
+							<div class="text-muted">時間帶危險度</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-6 col-lg-3">
+				<div class="panel panel-{% if temperature >= '17.5' and temperature <= '19.0' %}red {% endif %}{% if temperature < '17.5' or temperature > '19.0' %}teal {% endif %} panel-widget">
+					<div class="row no-padding">
+						<div class="col-sm-3 col-lg-5 widget-left">
+							<svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg>
+						</div>
+						<div class="col-sm-9 col-lg-7 widget-right">
+							<div class="large">{% if temperature >= '17.5' and temperature <= '19.0' %} 高 {% endif %}
+                                {% if temperature < '17.5' or temperature > '19.0' %} 低 {% endif %}</div>
+							<div class="text-muted">氣溫危險度</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-6 col-lg-3">
+				<div class="panel panel-{% if rainForcast.1 >= 80 %}red{% endif %}{% if rainForcast.1 >= 60 and rainForcast.1 < 80 %}orange {% endif %}{% if rainForcast.1 > 30 and rainForcast.1 < 60%}teal {% endif %} panel-widget">
+					<div class="row no-padding">
+						<div class="col-sm-3 col-lg-5 widget-left">
+                            <svg class="glyph stroked gear"><use xlink:href="#stroked-gear"/></svg>
+						</div>
+						<div class="col-sm-9 col-lg-7 widget-right">
+							<div class="large">
+                                 {% if rainForcast.1 >= 80 %} 高 {% endif %}
+                                {% if rainForcast.1 >= 60 and rainForcast.1 < 80 %} 中 {% endif %}
+                                {% if rainForcast.1 > 30 and rainForcast.1 < 60 %} 低 {% endif %}
+                            </div>
+							<div class="text-muted">降雨危險度</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-6 col-lg-3">
+				<div class="panel panel-{% if isHoliday == 100  %}red {% endif %}{% if isHoliday == 0  %}teal {% endif %} panel-widget">
+					<div class="row no-padding">
+						<div class="col-sm-3 col-lg-5 widget-left">
+							<svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg>
+						</div>
+						<div class="col-sm-9 col-lg-7 widget-right">
+							<div class="large">
+                                {% if isHoliday == 100  %}高{% endif %}
+                                {% if isHoliday == 0  %}低{% endif %}
+                            </div>
+							<div class="text-muted">節慶/連續假期危險度</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/.row-->
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+
+					<div class="panel-body">
+
+							<div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    防範小偷，人人有責
+                                </div>
+                                <div class="panel-body">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <img src="/static/img/HouseKeeper.png" height="350">
+                                            </td>
+                                            <td>
+                                                <p style="font-size:22px">    1.外出時或每夜睡前，一定要檢查門窗並上鎖。 </p>
+                                                <p style="font-size:22px">    2.公共照明或報案設備如有損毀故障，應立即報請檢修。 </p>
+                                                <p style="font-size:22px">    3.房舍門窗除採光和通風所需外，應儘量少設少開，以減少防竊上的困難。 </p>
+                                                <p style="font-size:22px">    4.家裡遇有外人按錯門鈴的現象時，須提高警覺，這可能就是竊賊投石問路。 </p>
+                                                <p style="font-size:22px">    5.電話常是竊賊打探的工具，故儘量少讓外人知道，接獲不明電話時，應有所警覺，以免竊賊所乘。</p>
+                                                <p style="font-size:22px">    6.活動梯子不可隨便放在屋外，如無法收藏在屋內，也一定要上鎖。</p>
+                                                <p style="font-size:22px">    7.家裡有貴重東西最好租銀行保管箱存放，萬一沒有也應將貴重東西分散藏放，遭竊 時較可避免損失慘重。</p>
+                                                <p style="font-size:22px">    8.對講機按鈕有被做記號者，可能是歹徒已勘察過做為行竊對象。</p>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+
+                                </div>
+                            </div>
+
+					</div>
+				</div>
+			</div>
+		</div><!--/.row-->
+		
+		<div class="row">
+			<div class="col-xs-6 col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-body easypiechart-panel">
+						<h4>時間帶（照明度）</h4>
+						<div class="easypiechart" id="easypiechart-blue" data-percent="{{ light.1 }}" ><span class="percent">{{ light.0 }}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-body easypiechart-panel">
+						<h4>氣溫因子</h4>
+						<div class="easypiechart" id="easypiechart-orange" data-percent="{{ temperature }}" ><span class="percent">{{ temperature }}度Ｃ</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-body easypiechart-panel">
+						<h4>降雨情形</h4>
+						<div class="easypiechart" id="easypiechart-teal" data-percent="{{ rainForcast.1 }}" ><span class="percent">{{ rainForcast.0 }}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-body easypiechart-panel">
+						<h4>是否有節慶or連續假期</h4>
+						<div class="easypiechart" id="easypiechart-red" data-percent="{{ isHoliday }}" ><span class="percent">{{ isHolidayStr }}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/.row-->
+								
+
+	</div>	<!--/.main-->
+
+	<script src="/static/lumino/js/jquery-1.11.1.min.js"></script>
+	<script src="/static/lumino/js/bootstrap.min.js"></script>
+	<script src="/static/lumino/js/chart.min.js"></script>
+	<script src="/static/lumino/js/chart-data.js"></script>
+	<script src="/static/lumino/js/easypiechart.js"></script>
+	<script src="/static/lumino/js/easypiechart-data.js"></script>
+	<script src="/static/lumino/js/bootstrap-datepicker.js"></script>
+	<script>
+		$('#calendar').datepicker({
+		});
+
+		!function ($) {
+		    $(document).on("click","ul.nav li.parent > a > span.icon", function(){          
+		        $(this).find('em:first').toggleClass("glyphicon-minus");      
+		    }); 
+		    $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+		}(window.jQuery);
+
+		$(window).on('resize', function () {
+		  if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+		})
+		$(window).on('resize', function () {
+		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+		})
+	</script>	
+</body>
+
+</html>

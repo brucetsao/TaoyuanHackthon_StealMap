@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport"></meta>
+<title>cameraNew - Google Fusion Tables</title>
+
+
+   <style>
+      html, body {
+        height: 80%;
+
+        margin: 0;
+        padding: 0;
+      }
+      #googft-mapCanvas {
+        height: 60%;
+        width:70%;
+      }
+    </style>
+
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?v=3"></script>
+<link href="/static/lumino/css/bootstrap.min.css" rel="stylesheet">
+<link href="/static/lumino/css/datepicker3.css" rel="stylesheet">
+<link href="/static/lumino/css/styles.css" rel="stylesheet">
+
+<!--Icons-->
+<script src="/static/lumino/js/lumino.glyphs.js"></script>
+
+<!--[if lt IE 9]>
+<script src="js/html5shiv.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
+<script type="text/javascript">
+  function initialize() {
+    google.maps.visualRefresh = true;
+    var isMobile = (navigator.userAgent.toLowerCase().indexOf('android') > -1) ||
+      (navigator.userAgent.match(/(iPod|iPhone|iPad|BlackBerry|Windows Phone|iemobile)/));
+    if (isMobile) {
+      var viewport = document.querySelector("meta[name=viewport]");
+      viewport.setAttribute('content', 'initial-scale=1.0, user-scalable=no');
+    }
+    var mapDiv = document.getElementById('googft-mapCanvas');
+    mapDiv.style.width = isMobile ? '100%' : '100%';
+    mapDiv.style.height = isMobile ? '100%' : '100%';
+    var map = new google.maps.Map(mapDiv, {
+      center: new google.maps.LatLng({{ s_lat }}, {{ s_long }}),
+      zoom: 18,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+        zoomControl: true,
+       mapTypeControl: true,
+        scaleControl: true,
+       streetViewControl: true,
+    });
+
+    layer = new google.maps.FusionTablesLayer({
+      map: map,
+      heatmap: { enabled: false },
+      query: {
+        select: "col0",
+        from: "1ITdutufDP8thTmeDQrNH0V38joaJsHT7Ylbybkml",
+        where: ""
+      },
+      options: {
+        styleId: 2,
+        templateId: 3
+      }
+    });
+
+    if (isMobile) {
+      var legend = document.getElementById('googft-legend');
+      var legendOpenButton = document.getElementById('googft-legend-open');
+      var legendCloseButton = document.getElementById('googft-legend-close');
+      legend.style.display = 'none';
+      legendOpenButton.style.display = 'block';
+      legendCloseButton.style.display = 'block';
+      legendOpenButton.onclick = function() {
+        legend.style.display = 'block';
+        legendOpenButton.style.display = 'none';
+      }
+      legendCloseButton.onclick = function() {
+        legend.style.display = 'none';
+        legendOpenButton.style.display = 'block';
+      }
+    }
+   var layer = new google.maps.FusionTablesLayer({
+    query: {
+      select: "col0",
+      from: "1BMXKZi7YqG0HyRE7HeOehxeyd9aiFxwiOGPFCRUN",
+    },
+      options: {
+        styleId: 2,
+        templateId: 3
+      }
+  });
+  layer.setMap(map);
+
+  var layer2 = new google.maps.FusionTablesLayer({
+      map: map,
+      heatmap: { enabled: false },
+      query: {
+        select: "col3",
+        from: "1tz1ok3I0P7TVbzXFBnrmOLAMlVEvqpAn3y6ze937",
+        where: ""
+      },
+      options: {
+        styleId: 2,
+        templateId: 2
+      }
+    });
+
+  var layer3 = new google.maps.FusionTablesLayer({
+      map: map,
+      heatmap: { enabled: false },
+      query: {
+        select: "col0",
+        from: "1sHS8G5VwoZu3H_jexsPnU9QIkL3LuudkG-U6rXoo",
+        where: ""
+      },
+      options: {
+        styleId: 2,
+        templateId: 3
+      }
+    });
+
+    var circle = new google.maps.Circle({
+              center: new google.maps.LatLng({{ s_lat }}, {{ s_long }}),
+              radius: 100,
+              map: map,
+              fillOpacity: 0.2,
+              strokeOpacity: 0.5,
+              strokeWeight: 1
+            });
+
+            // Update the radius when the user makes a selection.
+            google.maps.event.addDomListener(document.getElementById('radius'),
+                'change', function() {
+                  var meters = parseInt(this.value, 10);
+                  layer.setOptions({
+                    query: {
+                      select: 'Address',
+                      from: tableid,
+                      where: 'ST_INTERSECTS(Address, ' +
+                          'CIRCLE(LATLNG(37.4, -122.1), ' + meters + '))'
+                    }
+                  });
+                  circle.setRadius(meters);
+                });
+
+
+  }
+
+
+  google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+</head>
+<style>
+
+
+</style>
+
+<body>
+  <div id="googft-mapCanvas"></div>
+<table>
+
+    <tr>
+        <td align="left">
+              <table style="border: 1px solid black;">
+                  <tr>
+                      <td colspan="8"> <p style="font-size:25px">地圖圖例</p></td>
+                  </tr>
+                  <tr>
+                      <td>
+                          <p style="font-size:25px">竊盜點</p>
+                      </td>
+                      <td>
+                          <img src="/static/img/yellow.png" height="20">
+                      </td>
+                                            <td>
+                          <p style="font-size:25px">監視器</p>
+                      </td>
+                      <td>
+                          <img src="/static/img/red.png" height="20">
+                      </td>
+                                            <td>
+                          <p style="font-size:25px">路燈</p>
+                      </td>
+                      <td>
+                          <img src="/static/img/purple.png" height="20">
+                      </td>
+                                            <td>
+                          <p style="font-size:25px">婦女受害</p>
+                      </td>
+                      <td>
+                          <img src="/static/img/green.png" height="20">
+                      </td>
+
+                  </tr>
+              </table>
+        </td>
+        <td> &nbsp;&nbsp;&nbsp;</td>
+
+        <td align="left">
+             <table style="border: 1px solid black;">
+                  <tr>
+                      <td>
+                        <p style="font-size:25px">300公尺內路燈數</p>
+                      </td>
+                      <td>
+                         <p style="font-size:25px; color:red;">8</p>
+                      </td>
+                      <td></td>
+                       <td>
+                        <p style="font-size:25px">100公尺內發生偷竊事件</p>
+                      </td>
+                      <td>
+                         <p style="font-size:25px; color:red;">0</p>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                        <p style="font-size:25px">100公尺內監視器數</p>
+                      </td>
+                      <td>
+                         <p style="font-size:25px; color:red;">1</p>
+                      </td>
+                      <td>&nbsp;&nbsp;&nbsp;</td>
+                      <td>
+                        <p style="font-size:25px">100公尺內發生婦女受害事件</p>
+                      </td>
+                      <td>
+                         <p style="font-size:25px; color:red;">0</p>
+                      </td>
+                      <td> </td>
+
+                  </tr>
+
+              </table>
+        </td>
+
+
+
+     </tr>
+    <tr>
+         <td>
+            <tr>
+                <td><p style="font-size:25px;">自然及環境因子即時監控</p></td>
+            </tr>
+            <tr>
+
+                <td>
+                     <div class="row">
+			<div class="col-xs-12 col-md-6 col-lg-3">
+				<div class="panel panel-{% if light.1 <= '30' %}red {% endif %}{% if light.1 > '30' and light.1 <= '60' %}orange {% endif %}{% if light.1 > '60' %}teal {% endif %} panel-widget ">
+					<div class="row no-padding">
+						<div class="col-sm-3 col-lg-5 widget-left">
+							<svg class="glyph stroked clock"><use xlink:href="#stroked-clock"></use></svg>
+						</div>
+						<div class="col-sm-9 col-lg-7 widget-right">
+							<div class="large">
+                                {% if light.1 <= '30' %} 高 {% endif %}
+                                {% if light.1 > '30' and light.1 <= '60' %} 中 {% endif %}
+                                {% if light.1 > '60' %} 低 {% endif %}
+                            </div>
+							<div class="text-muted">時間帶危險度</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-6 col-lg-3">
+				<div class="panel panel-{% if temperature >= '17.5' and temperature <= '19.0' %}red {% endif %}{% if temperature < '17.5' or temperature > '19.0' %}teal {% endif %} panel-widget">
+					<div class="row no-padding">
+						<div class="col-sm-3 col-lg-5 widget-left">
+							<svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg>
+						</div>
+						<div class="col-sm-9 col-lg-7 widget-right">
+							<div class="large">{% if temperature >= '17.5' and temperature <= '19.0' %} 高 {% endif %}
+                                {% if temperature < '17.5' or temperature > '19.0' %} 低 {% endif %}</div>
+							<div class="text-muted">氣溫危險度</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-6 col-lg-3">
+				<div class="panel panel-{% if rainForcast.1 >= 80 %}red{% endif %}{% if rainForcast.1 >= 60 and rainForcast.1 < 80 %}orange {% endif %}{% if rainForcast.1 > 30 and rainForcast.1 < 60%}teal {% endif %} panel-widget">
+					<div class="row no-padding">
+						<div class="col-sm-3 col-lg-5 widget-left">
+                            <svg class="glyph stroked gear"><use xlink:href="#stroked-gear"/></svg>
+						</div>
+						<div class="col-sm-9 col-lg-7 widget-right">
+							<div class="large">
+                                 {% if rainForcast.1 >= 80 %} 高 {% endif %}
+                                {% if rainForcast.1 >= 60 and rainForcast.1 < 80 %} 中 {% endif %}
+                                {% if rainForcast.1 > 30 and rainForcast.1 < 60 %} 低 {% endif %}
+                            </div>
+							<div class="text-muted">降雨危險度</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-6 col-lg-3">
+				<div class="panel panel-{% if isHoliday == 100  %}red {% endif %}{% if isHoliday == 0  %}teal {% endif %} panel-widget">
+					<div class="row no-padding">
+						<div class="col-sm-3 col-lg-5 widget-left">
+							<svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg>
+						</div>
+						<div class="col-sm-9 col-lg-7 widget-right">
+							<div class="large">
+                                {% if isHoliday == 100  %}高{% endif %}
+                                {% if isHoliday == 0  %}低{% endif %}
+                            </div>
+							<div class="text-muted">節慶/連續假期危險度</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/.row-->
+
+                </td>
+            </tr>
+
+        </td>
+    </tr>
+</table>
+
+
+
+</body>
+</html>

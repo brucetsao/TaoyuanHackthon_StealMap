@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>全能住宅檢測王＿檢測</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link href="/static/css/freelancer.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+</head>
+<style>
+.quick-btn {
+  position: relative;
+  display: inline-block;
+  width: 150px;
+  height: 80px;
+  padding-top: 16px;
+  margin: 10px;
+  color: #444444;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+  -webkit-box-shadow: 0 0 0 1px #F8F8F8 inset, 0 0 0 1px #CCCCCC;
+  box-shadow: 0 0 0 1px #F8F8F8 inset, 0 0 0 1px #CCCCCC;
+}
+
+
+.btn-metis-4  {
+  color: #ffffff;
+  background-color: #a264e7;
+  border-color: #62309a;
+}
+
+
+
+
+.user-stats .progress .progress-bar {
+    text-align: left;
+    padding-left: 5px;
+    min-width: 20px;
+}
+
+
+</style>
+<link href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css" rel="stylesheet" media="screen">
+<script>
+
+	function hit(){
+		var tmpHealth = $( "#health" ).text()
+		tmpHealth = tmpHealth - 20
+		$( "#health" ).text(tmpHealth);
+		$('#health').css('width', tmpHealth+'%');
+
+		var currentHealth = $( "#health" ).text();
+		if(currentHealth == 80){
+			$("#thiefPic").attr("src","/static/img/thief_02.jpg")
+
+		}
+		if(currentHealth == 60){
+			$("#thiefPic").attr("src","/static/img/thief_01.jpg")
+		}
+		if(currentHealth == 40){
+			$("#thiefPic").attr("src","/static/img/police02.jpg")
+		}
+		if(currentHealth == 20){
+			$("#thiefPic").attr("src","/static/img/thief_07.jpg")
+		}
+		if(currentHealth == 0){
+			$("#thiefPic").attr("src","/static/img/thief_06.jpg")
+			$("#alertContent").text("恭喜你!你打敗小偷幫啦~~")
+			setTimeout(function() {
+				window.location.href = '../8_Success/';
+			 }, 2000);
+		}
+
+	};
+	$(document).ready(function(){
+		$("#guardBtn").click(function() {
+			$( "#guardBtn" ).attr('disabled','disabled');
+			$('#guardBtn').css('color', 'red');
+            window.open('../page_guard_info','桃園保全分佈圖')
+		});
+		$("#cameraBtn").click(function() {
+			$( "#cameraBtn" ).attr('disabled','disabled');
+			$('#cameraBtn').css('color', 'red');
+            window.open('../page_camera_info','桃園監視器分佈圖')
+		});
+		$("#windowBtn").click(function() {
+			$( "#windowBtn" ).attr('disabled','disabled');
+			$('#windowBtn').css('color', 'red');
+            window.open('../page_window_info','桃園鐵窗公司分佈圖')
+		});
+		$("#lightBtn").click(function() {
+			$( "#lightBtn" ).attr('disabled','disabled');
+			$('#lightBtn').css('color', 'red');
+             window.open('../page_officer_info','增建路燈找里長')
+		});
+		$("#moneyBtn").click(function() {
+			$( "#moneyBtn" ).attr('disabled','disabled');
+			$('#moneyBtn').css('color', 'red');
+
+		});
+	});
+
+
+
+
+</script>
+<body id="page-top" class="index">
+
+    <!-- Navigation -->
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="#page-top">全能住宅檢測王</a>
+            </div>
+
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                        <table class="table">
+		<tr>
+			<td colspan=5 align="center">
+				<img id="thiefPic" height="300px" src="/static/img/thief_01.jpg">
+			</td>
+
+		</tr>
+		<tr>
+			<td colspan=5 align="center">
+				<div class="user-stats">
+					<h5>小偷生命值</h5>
+					<div class="progress">
+						<div class="progress-bar progress-bar-warning" id="health" style="width: 100%;">100</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<button type="button"  id="guardBtn" class="quick-btn" onclick="hit();return false;">
+				<i class="fa fa-eye fa-2x"></i><br/>
+				建議建置保全系統</button>
+
+			</td>
+			<td>
+				<button type="button"  id="cameraBtn" class="quick-btn" onclick="hit();return false;">
+				<i class="fa fa-video-camera fa-2x"></i><br/>
+				建議裝設監視器</button>
+			</td>
+			<td>
+
+				<button type="button"  id="windowBtn" class="quick-btn" onclick="hit();return false;">
+				<i class="fa fa-bank fa-2x"></i><br/>
+				建議裝設鐵窗</button>
+			</td>
+			<td>
+				<button type="button"  id="lightBtn" class="quick-btn" onclick="hit();return false;">
+				<i class="fa fa-lightbulb-o fa-2x"></i><br/>
+				建議裝設夜間燈光</button>
+
+			</td>
+			<td>
+				<button type="button"  id="moneyBtn" class="quick-btn" onclick="hit();return false;">
+				<i class="fa fa-diamond fa-2x"></i><br/>
+				錢財不露白</button>
+			</td>
+		</tr>
+        <tr>
+            <td>
+
+            </td>
+            <td>
+
+            </td>
+            <td>
+
+            </td>
+            <td>
+
+            </td>
+            <td>
+
+            </td>
+        </tr>
+        <tr >
+            <td colspan="5" align="">
+                <a href="http://188.166.246.117/steal/stealGame/stealGame/"><p style="color:red; font-size:30px; ">給我更好玩的遊戲吧！</p></a>
+            </td>
+        </tr>
+                <tr >
+            <td colspan="5" align="">
+                <a href="../8_Success/"><p style="color:black; font-size:30px; ">下一頁</p></a>
+            </td>
+        </tr>
+		<tr>
+			<td colspan=5 align="center">
+				<p style="color:red; font-size:40px" id="alertContent"></p>
+			</td>
+		</tr>
+
+	</table>
+
+
+                <br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
+                </div>
+            </div>
+        </div>
+    </header>
+    <footer>
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        Copyright &copy; Your Website 2016
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <!-- jQuery -->
+    <script src="/static/vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="/static/js/jqBootstrapValidation.js"></script>
+    <script src="/static/js/contact_me.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="/static/js/freelancer.min.js"></script>
+
+</body>
+
+</html>
