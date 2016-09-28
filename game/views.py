@@ -391,7 +391,7 @@ def action_login(request):
 
 
 def connect_postgre():
-    conn = psycopg2.connect(database="taoyuangis", user="postgres", password=“tp6ful3mp6”, host="127.0.0.1", port="5432")
+    conn = psycopg2.connect(database="taoyuangis", user="postgres", password="please input your password here", host="127.0.0.1", port="5432")
 
 
     cur = conn.cursor()
