@@ -19,4 +19,6 @@ Materials
 
 -Our Discussion Hackpad [Hackpad](https://hackpad.com/uwYuA9HsMK3)
 
--Take a Pick at out Website  [Video](https://youtu.be/M-6WEq4lhVM)
+-Take a Pick at our Website  [Video](https://youtu.be/M-6WEq4lhVM)
+
+-Website Demo [PDF](https://drive.google.com/open?id=0B158iGrlsSveMlV2azZtbHZBRUE)
